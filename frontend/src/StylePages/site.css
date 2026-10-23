@@ -1,0 +1,42 @@
+/* layout.css (was site.css): shared page wrapper only. */
+
+.site-page {
+  --site-ink: #102943;
+  min-height: 100vh;
+  overflow: clip;
+  color: var(--site-ink);
+  background: linear-gradient(145deg, #e7eef2, #dce7ec);
+  font-family: var(--font-ui);
+}
+
+.site-page main {
+  min-height: 65vh;
+}
+
+.site-page :where(section) {
+  scroll-margin-top: 5.5rem;
+}
+
+.site-page :where(h1, h2, h3, h4) {
+  text-wrap: balance;
+}
+
+.site-page :where(p) {
+  text-wrap: pretty;
+}
+
+.site-page :where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid #42bed5;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-page :where(*),
+  .site-page :where(*::before),
+  .site-page :where(*::after) {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

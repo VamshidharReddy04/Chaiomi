@@ -1,0 +1,352 @@
+/* Scroll-driven kiosk animation. No images, no blur, no heavy effects. */
+
+.kiosk {
+  position: relative;
+  height: var(--kiosk-height, 500vh);
+  color: #f5fbfe;
+  background:
+    radial-gradient(ellipse at 50% 30%, #0c2a50, transparent 65%),
+    #07152c;
+}
+
+.kiosk-sticky {
+  position: sticky;
+  top: 0;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  box-sizing: border-box;
+  height: 100vh;
+  height: 100svh;
+  padding: var(--nav-h, 4.5rem) 1rem 0;
+  overflow: hidden;
+}
+
+.kiosk-hero-copy {
+  position: absolute;
+  z-index: 2;
+  right: 38%;
+  bottom: clamp(2.5rem, 9vh, 7rem);
+  left: clamp(1.5rem, 4vw, 4rem);
+  max-width: 42rem;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  pointer-events: none;
+}
+
+.kiosk-hero-copy.is-hidden {
+  opacity: 0;
+  transform: translateY(1rem);
+}
+
+.kiosk-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  justify-self: stretch;
+  align-self: stretch;
+}
+
+.kiosk-stage {
+  position: relative;
+}
+
+.kiosk-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* SVG text and station highlights */
+.kiosk-svg .k-label {
+  font: 500 13px var(--font-ui);
+  letter-spacing: 0.1em;
+  fill: rgba(222, 240, 248, 0.45);
+  transition: fill 0.3s ease;
+}
+
+.kiosk-svg .k-screen-title {
+  font: 600 22px var(--font-ui);
+  letter-spacing: 0.2em;
+  fill: #a5eaf1;
+}
+
+.kiosk-svg .k-screen-text {
+  font: 500 11px var(--font-ui);
+  fill: #f1b08a;
+}
+
+.kiosk-svg .k-box {
+  stroke: rgba(166, 224, 240, 0.35);
+  stroke-width: 1.5;
+  transition: stroke 0.3s ease, stroke-width 0.3s ease;
+}
+
+.kiosk-svg[data-step="0"] .k-st-cups .k-box,
+.kiosk-svg[data-step="1"] .k-st-ice .k-box,
+.kiosk-svg[data-step="2"] .k-st-brew .k-box,
+.kiosk-svg[data-step="3"] .k-st-pick .k-box {
+  stroke: #9be8f1;
+  stroke-width: 3;
+}
+
+.kiosk-svg[data-step="0"] .k-l0,
+.kiosk-svg[data-step="1"] .k-l1,
+.kiosk-svg[data-step="2"] .k-l2,
+.kiosk-svg[data-step="3"] .k-l3 {
+  fill: #f0a479;
+}
+
+/* Live joint readout */
+.kiosk-readout {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.kiosk-readout li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid rgba(166, 224, 240, 0.22);
+  border-radius: 0.7rem;
+  background: rgba(7, 21, 44, 0.85);
+  font: 500 0.7rem / 1.2 var(--font-ui);
+  color: #a5eaf1;
+}
+
+.kiosk-readout em {
+  font-style: normal;
+  color: rgba(222, 240, 248, 0.6);
+}
+
+.kiosk-readout output {
+  font-size: 0.9rem;
+  color: #f5fbfe;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Captions: all stacked in one grid cell, only the active one shows */
+.kiosk-captions {
+  display: grid;
+}
+
+.kiosk-step {
+  grid-area: 1 / 1;
+  box-sizing: border-box;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid rgba(166, 224, 240, 0.25);
+  border-radius: 1.1rem;
+  background: rgba(7, 21, 44, 0.88);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.kiosk-step.is-active {
+  opacity: 1;
+  transform: none;
+}
+
+.kiosk-step-number {
+  font: 500 0.85rem / 1 var(--font-ui);
+  letter-spacing: 0.14em;
+  color: #f0a479;
+}
+
+.kiosk-step-title {
+  margin-top: 0.45rem;
+  font: 500 1.3rem / 1.2 var(--font-ui);
+  letter-spacing: -0.03em;
+}
+
+.kiosk-step-text {
+  margin-top: 0.4rem;
+  font: 400 0.92rem / 1.55 var(--font-ui);
+  color: rgba(222, 240, 248, 0.8);
+}
+
+.kiosk-progress {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: rgba(166, 224, 240, 0.12);
+}
+
+.kiosk-progress span {
+  display: block;
+  height: 100%;
+  background: #f0a479;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.kiosk-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.kiosk-cta{
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.kiosk-cta-text{
+  font: 500 1.2rem / 1.4 var(--font-ui);
+  color: #f5fbfe;
+  margin-bottom: 1rem;
+}
+
+.kiosk-loading{
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font: 500 1.2rem / 1.4 var(--font-ui);
+  letter-spacing: 0.04em;
+  color: #a5eaf1;
+  pointer-events: none;
+}
+
+/* Clean neutral dark background (no brown) */
+.kiosk {
+  background:
+    radial-gradient(ellipse at 50% 38%, #1b1e25 0%, #101216 55%, #08090b 100%);
+}
+
+.kiosk-intro {
+  background: linear-gradient(180deg, #08090b, #0c0d10);
+}
+
+.kiosk-fallback {
+  background: #08090b;
+}
+
+.kiosk-step,
+.kiosk-readout li {
+  background: rgba(16, 17, 20, 0.88);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.kiosk-readout,
+.kiosk-readout em {
+  color: #d8d8d8;
+}
+
+/* Desktop: captions on the left, scene on the right */
+@media (min-width: 900px) {
+  .kiosk-sticky {
+    padding-inline: 0;
+  }
+  .kiosk-stage {
+    grid-area: 1 / 1;
+  }
+  .kiosk-readout {
+    position: absolute;
+    z-index: 2;
+    top: clamp(5.5rem, 12vh, 8rem);
+    right: clamp(1.5rem, 4vw, 4rem);
+    width: min(30rem, 40vw);
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+  .kiosk-captions {
+    position: absolute;
+    z-index: 2;
+    right: 38%;
+    bottom: clamp(2.5rem, 9vh, 7rem);
+    left: clamp(1.5rem, 4vw, 4rem);
+    pointer-events: none;
+  }
+  .kiosk-step {
+    padding: 1.4rem 1.6rem;
+    max-width: 42rem;
+    border: 0;
+    background: linear-gradient(90deg, rgba(8, 9, 11, 0.72), rgba(8, 9, 11, 0));
+  }
+  .kiosk-step-title {
+    font-size: 1.9rem;
+  }
+  .kiosk-step-text {
+    font-size: 1rem;
+  }
+}
+
+/* Reduced motion: no scroll animation, just the finished scene and the steps */
+.kiosk-static {
+  height: auto;
+  padding: 3rem 1rem;
+}
+
+.kiosk-static .kiosk-stage {
+  max-width: 56rem;
+  margin: 0 auto 1rem;
+}
+
+.kiosk-static .kiosk-readout {
+  max-width: 56rem;
+  margin: 0 auto 2rem;
+}
+
+.kiosk-static-steps {
+  display: grid;
+  gap: 1.25rem;
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.kiosk-static-steps h3 {
+  font: 500 1.3rem / 1.2 var(--font-ui);
+}
+
+.kiosk-static-steps p {
+  margin-top: 0.35rem;
+  color: rgba(222, 240, 248, 0.8);
+}
+
+/* Page intro above the animation */
+.kiosk-intro {
+  padding: 3.5rem 1rem 2.5rem;
+  text-align: center;
+  color: #f5fbfe;
+  background: linear-gradient(180deg, #061329, #07152c);
+}
+
+.kiosk-intro-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #a5eaf1;
+}
+
+.kiosk-intro-title {
+  max-width: 24ch;
+  margin: 0.8rem auto 0;
+  font: 500 clamp(2rem, 6vw, 3.5rem) / 1.08 var(--font-ui);
+  letter-spacing: -0.05em;
+  text-wrap: balance;
+}
+
+.kiosk-intro-text {
+  max-width: 36rem;
+  margin: 1rem auto 0;
+  font: 400 1rem / 1.6 var(--font-ui);
+  color: rgba(222, 240, 248, 0.8);
+}
+
+.kiosk-fallback {
+  min-height: 100vh;
+  background: #07152c;
+}

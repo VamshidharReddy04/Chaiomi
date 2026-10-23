@@ -1,0 +1,218 @@
+/* Locations page. Mobile-first. */
+
+.locations-page {
+  min-height: 70vh;
+  padding: 2.5rem 1rem;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.9), transparent 46%),
+    linear-gradient(145deg, #e6eef2, #dce7ec);
+}
+
+.locations-container {
+  max-width: 82rem;
+  margin-inline: auto;
+}
+
+.locations-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.locations-eyebrow {
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #2a7f9b;
+}
+
+.locations-title {
+  margin-top: 0.6rem;
+  font-size: clamp(1.9rem, 6vw, 2.8rem);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  color: #153653;
+}
+
+.locations-intro {
+  max-width: 42rem;
+  margin: 1rem auto 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #5b7186;
+}
+
+/* ---------- Map ---------- */
+.locations-map {
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.92);
+  border-radius: 1.5rem;
+  background: #fff;
+  box-shadow: 0 25px 70px rgba(23, 55, 86, 0.2), inset 0 1px #fff;
+}
+
+.locations-map-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.locations-map-button {
+  padding: 0.5rem 1rem;
+  border: 1px solid #173e6d;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: #173e6d;
+  background: #fff;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.locations-map-button-active,
+.locations-map-button:hover {
+  color: #fff;
+  background: #173e6d;
+}
+
+.locations-map-canvas {
+  display: block;
+  width: 100%;
+  height: 18rem;
+  border: 0;
+}
+
+/* ---------- Cards ---------- */
+.locations-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.locations-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.82);
+  border-radius: 1.3rem;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.76), rgba(225, 240, 247, 0.52));
+  box-shadow: 0 24px 68px rgba(23, 55, 86, 0.15), inset 0 1px rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: transform 0.32s var(--ease-premium, ease), box-shadow 0.32s ease,
+    border-color 0.32s ease;
+}
+
+.locations-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(73, 196, 220, 0.55);
+  box-shadow: 0 29px 68px rgba(23, 55, 86, 0.2), inset 0 1px #fff;
+}
+
+.locations-card-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.locations-card-icon {
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+  color: #3297b0;
+}
+
+.locations-card-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #173958;
+}
+
+.locations-card-city,
+.locations-card-address,
+.locations-card-hours {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #5d7489;
+}
+
+.locations-card-city {
+  margin-top: 0.25rem;
+}
+
+.locations-card-address {
+  margin-top: 0.75rem;
+}
+
+.locations-card-hours {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.locations-card-hours svg {
+  color: #3896ae;
+}
+
+.locations-card-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.7rem;
+  margin-top: auto;
+  padding: 0.6rem 1.5rem;
+  border: 1px solid rgba(97, 195, 218, 0.36);
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: #f1fbff;
+  background: linear-gradient(135deg, #164d79, #102d56);
+  transition: transform 0.25s var(--ease-premium, ease), background 0.25s ease;
+}
+
+.locations-card:has(.locations-card-hours) .locations-card-button {
+  margin-top: 1.5rem;
+}
+
+.locations-card-button:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #23628c, #153c67);
+}
+
+/* ---------- Breakpoints ---------- */
+@media (min-width: 768px) {
+  .locations-page {
+    padding: 4rem 1.5rem;
+  }
+  .locations-map-canvas {
+    height: 24rem;
+  }
+  .locations-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .locations-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .locations-card,
+  .locations-card-button {
+    transition-duration: 0.01ms !important;
+  }
+  .locations-card:hover {
+    transform: none;
+  }
+}

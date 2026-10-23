@@ -1,0 +1,344 @@
+/* How it Works (Home) */
+
+.how-section {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: 3.5rem;
+  background:
+    radial-gradient(ellipse at 50% 4%, rgba(255, 255, 255, 0.88), transparent 47%),
+    linear-gradient(145deg, #e5edf1 0%, #d8e3e9 54%, #e7eef1 100%);
+}
+
+.how-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.21;
+  background-image:
+    linear-gradient(rgba(31, 86, 126, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(31, 86, 126, 0.12) 1px, transparent 1px);
+  background-size: 68px 68px;
+  mask-image: linear-gradient(180deg, #000, transparent 84%);
+}
+
+.how-glow {
+  position: absolute;
+  left: 50%;
+  width: 34rem;
+  height: 34rem;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(79, 211, 236, 0.19), transparent 69%);
+  filter: blur(40px);
+  translate: -50% 0;
+}
+
+.how-container {
+  position: relative;
+  max-width: 84rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+.how-header {
+  max-width: 48rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.how-title {
+  margin-top: 0.65rem;
+  font: 500 clamp(2.15rem, 2.5vw, 3.2rem) / 1.08 var(--font-ui);
+  letter-spacing: -0.055em;
+  color: #122d4c;
+}
+
+.how-intro {
+  max-width: 43rem;
+  margin: 1.25rem auto 0;
+  font: 500 1rem / 1.4 var(--font-ui);
+  color: #52677d;
+}
+
+.how-steps {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 2.2rem;
+}
+
+.how-timeline {
+  pointer-events: none;
+  position: absolute;
+  top: -2.25rem;
+  left: 0;
+  right: 0;
+  display: none;
+  height: 0.75rem;
+}
+
+.how-step {
+  position: relative;
+}
+
+.how-reveal {
+  height: 100%;
+}
+
+.how-tilt {
+  height: 100%;
+  border-radius: 1.3rem;
+}
+
+.how-tilt .tilt-glare {
+  display: none;
+}
+
+.how-card {
+  position: relative;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: 0.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.84);
+  border-radius: 1.3rem;
+  cursor: pointer;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.77), rgba(232, 244, 250, 0.48));
+  box-shadow: 0 24px 70px rgba(27, 54, 88, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(22px) saturate(145%);
+  -webkit-backdrop-filter: blur(22px) saturate(145%);
+  transition: transform 0.45s var(--ease-premium, ease), border-color 0.45s ease,
+    box-shadow 0.45s ease;
+}
+
+.how-card:hover,
+.how-card.is-active {
+  transform: translateY(-7px);
+  border-color: rgba(76, 205, 231, 0.62);
+  box-shadow: 0 30px 74px rgba(21, 60, 96, 0.2), 0 0 0 1px rgba(96, 220, 241, 0.22),
+    inset 0 1px #fff;
+}
+
+.how-card:focus-visible {
+  outline: 2px solid #2baecb;
+  outline-offset: 4px;
+}
+
+.how-card-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.34;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 0%, rgba(96, 218, 241, 0.2), transparent 66%);
+  transition: opacity 0.5s ease;
+}
+
+.how-card:hover .how-card-glow,
+.how-card-glow.is-active {
+  opacity: 0.8;
+}
+
+.how-media {
+  position: relative;
+  width: 100%;
+  height: 13rem;
+  overflow: hidden;
+  border-radius: 1.1rem;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.26);
+}
+
+.how-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.94;
+  transition: transform 0.5s ease;
+}
+
+.how-placeholder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.how-placeholder.is-hidden {
+  opacity: 0;
+}
+
+.how-placeholder-content {
+  text-align: center;
+}
+
+.how-placeholder-icon,
+.how-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid rgba(108, 223, 240, 0.55);
+  border-radius: 1rem;
+  color: #ffffff;
+  background: rgba(18, 54, 87, 0.95);
+  box-shadow: 0 0 22px rgba(67, 204, 231, 0.24), inset 0 1px rgba(255, 255, 255, 0.2);
+  transition: scale 0.5s ease, rotate 0.5s ease, background 0.5s ease, color 0.5s ease;
+}
+
+.how-placeholder-icon {
+  margin-inline: auto;
+}
+
+.how-card:hover .how-placeholder-icon {
+  scale: 1.1;
+  rotate: 2deg;
+}
+
+.how-card:hover .how-icon {
+  scale: 1.1;
+  rotate: 3deg;
+}
+
+.how-icon.is-active {
+  color: #09233e;
+  background: #83e6f0;
+  scale: 1.1;
+  rotate: 3deg;
+}
+
+.how-icon-svg {
+  transition: transform 0.5s ease;
+}
+
+.how-placeholder-text {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #0f172b;
+}
+
+.how-content {
+  position: relative;
+  z-index: 10;
+  padding: 0.9rem 0.8rem 1rem;
+}
+
+.how-content-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.how-number {
+  font: 500 1rem / 1 var(--font-ui);
+  letter-spacing: 0.12em;
+  color: #45647d;
+  transition: color 0.5s ease;
+}
+
+.how-number.is-active {
+  color: #b95e35;
+}
+
+.how-card-title {
+  margin-top: 1rem;
+  font: 500 1.2rem / 1.2 var(--font-ui);
+  letter-spacing: -0.035em;
+  color: #102c4a;
+}
+
+.how-card-text {
+  max-width: 25rem;
+  margin-top: 0.55rem;
+  font: 500 0.9rem / 1.65 var(--font-ui);
+  color: #566b80;
+}
+
+.how-footer {
+  max-width: 36rem;
+  margin: 2.6rem auto 0;
+  text-align: center;
+}
+
+.how-footer-text,
+.how-footer-strong {
+  font: 500 0.9rem / 1.7 var(--font-ui);
+}
+
+.how-footer-text {
+  color: #57718a;
+}
+
+.how-footer-strong {
+  color: #173d60;
+}
+
+@media (min-width: 640px) {
+  .how-container {
+    padding-inline: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .how-section {
+    padding-block: clamp(5rem, 5vw, 8rem);
+  }
+  .how-steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.35rem;
+    margin-top: 3.25rem;
+  }
+  .how-timeline {
+    display: block;
+  }
+  .how-card {
+    padding: 0.7rem;
+    border-radius: 1.6rem;
+  }
+  .how-tilt {
+    border-radius: 1.6rem;
+  }
+  .how-media {
+    height: clamp(10rem, 19vw, 15rem);
+  }
+  .how-content {
+    padding: 1.1rem 1rem 1.25rem;
+  }
+  .how-card-title {
+    font-size: 1.34rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .how-container {
+    padding-inline: 2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .how-card,
+  .how-card-glow,
+  .how-video,
+  .how-placeholder,
+  .how-placeholder-icon,
+  .how-icon-svg,
+  .how-icon,
+  .how-number {
+    transition-duration: 0.01ms !important;
+  }
+  .how-card:hover,
+  .how-card.is-active {
+    transform: none;
+  }
+}

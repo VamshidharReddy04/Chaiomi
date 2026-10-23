@@ -1,0 +1,93 @@
+/* App download section (Home). */
+
+.app-section {
+  position: relative;
+  isolation: isolate;
+  padding: clamp(4rem, 4vw, 6rem) 1rem;
+  background: linear-gradient(145deg, #dce7ec, #e9f0f3);
+}
+
+.app-container {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: clamp(2.2rem, 2vw, 3.7rem) 1.5rem;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.88);
+  border-radius: 1.3rem;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(93, 210, 232, 0.17), transparent 56%),
+    linear-gradient(135deg, rgba(250, 253, 254, 0.75), rgba(224, 238, 244, 0.5));
+  box-shadow: 0 24px 70px rgba(27, 54, 88, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.88);
+}
+
+.app-heading {
+  margin: 0 0 0.55rem;
+  font: 500 clamp(1.8rem, 3vw, 2.65rem) / 1.1 var(--font-ui);
+  letter-spacing: -0.05em;
+  color: #173958;
+}
+
+.app-description {
+  margin: 0 0 1.4rem;
+  font: 500 0.9rem / 1.5 var(--font-ui);
+  color: #627b90;
+}
+
+.app-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0.7rem;
+}
+
+.button-android,
+.button-ios {
+  display: inline-block;
+  padding: 0.78rem 1.15rem;
+  border: 1px solid rgba(97, 195, 218, 0.4);
+  border-radius: 9999px;
+  font: 500 0.9rem / 1.4 var(--font-ui);
+  text-decoration: none;
+  text-align: center;
+  color: #f1fbff;
+  background: linear-gradient(135deg, #153f6c, #102b50);
+  box-shadow: 0 9px 25px rgba(18, 55, 89, 0.16), inset 0 1px rgba(255, 255, 255, 0.18);
+  transition: transform 0.25s var(--ease-premium, ease), box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.button-android:hover,
+.button-ios:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #23628c, #153c67);
+  box-shadow: 0 15px 34px rgba(18, 55, 89, 0.23);
+}
+
+@media (min-width: 421px) {
+  .app-buttons {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+}
+
+@media (min-width: 768px) {
+  .app-section {
+    padding-inline: 1.5rem;
+  }
+  .app-container {
+    border-radius: 1.6rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button-android,
+  .button-ios {
+    transition: none;
+  }
+  .button-android:hover,
+  .button-ios:hover {
+    transform: none;
+  }
+}

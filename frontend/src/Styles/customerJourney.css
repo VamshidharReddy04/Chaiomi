@@ -1,0 +1,312 @@
+/* Customer Journey carousel */
+
+.customer-journey-section {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: 1rem;
+  background: linear-gradient(180deg, #e7eef1 0%, #dce7ec 100%);
+}
+
+.customer-journey-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.21;
+  background-image:
+    linear-gradient(rgba(31, 86, 126, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(31, 86, 126, 0.12) 1px, transparent 1px);
+  background-size: 68px 68px;
+  mask-image: linear-gradient(180deg, #000, transparent 84%);
+}
+
+.customer-journey-container {
+  max-width: 83rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+.customer-journey-header {
+  max-width: 48rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.customer-journey-eyebrow {
+  font: 300 1rem / 1.4 var(--font-ui);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #22527e;
+}
+
+.customer-journey-title {
+  margin-top: 0.65rem;
+  font: 500 clamp(2.15rem, 2.5vw, 3.2rem) / 1.08 var(--font-ui);
+  letter-spacing: -0.055em;
+  color: #122d4c;
+}
+
+.customer-journey-intro {
+  max-width: 43rem;
+  margin: 0.9rem auto 0;
+  font: 500 1rem / 1.4 var(--font-ui);
+  color: #52677d;
+}
+
+.customer-journey-carousel {
+  position: relative;
+  max-width: 70rem;
+  margin: 2.6rem auto 0;
+}
+
+.customer-journey-card {
+  display: grid;
+  border-radius: 1.3rem;
+  box-shadow: 0 18px 48px rgba(22, 56, 87, 0.12), inset 0 1px #fff;
+}
+
+.customer-journey-slide {
+  display: block;
+  min-width: 0;
+  box-sizing: border-box;
+  border-radius: 1.3rem;
+  background: #ffffff;
+  animation: customer-journey-slide 450ms ease-in-out;
+}
+
+.customer-journey-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  max-height: 32rem;
+  overflow: hidden;
+  padding: 0.75rem;
+  border-radius: 1.3rem;
+  background: #ffffff;
+}
+
+.customer-journey-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  max-height: 32rem;
+  object-fit: contain;
+  object-position: center;
+}
+
+.customer-journey-content {
+  min-width: 0;
+  padding: 1.3rem;
+  border-radius: 1.3rem;
+  background: #ffffff;
+}
+
+.customer-journey-step-label {
+  font: 500 0.68rem / 1.5 var(--font-ui);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #bc704b;
+}
+
+.customer-journey-step-title {
+  margin-top: 0.75rem;
+  font: 500 clamp(1.8rem, 3vw, 2.55rem) / 1.1 var(--font-ui);
+  letter-spacing: -0.05em;
+  color: #163657;
+}
+
+.customer-journey-step-summary {
+  margin-top: 0.7rem;
+  font: 500 1rem / 1.6 var(--font-ui);
+  color: #315573;
+}
+
+.customer-journey-detail {
+  margin-top: 1.25rem;
+  padding-left: 0.9rem;
+  border-left: 2px solid rgba(41, 139, 171, 0.35);
+}
+
+.customer-journey-detail-text {
+  font: 500 0.9rem / 1.7 var(--font-ui);
+  color: #52677b;
+}
+
+.customer-journey-cursor {
+  display: inline-block;
+  width: 0.125rem;
+  height: 1.25rem;
+  margin-left: 0.125rem;
+  vertical-align: -3px;
+  background: #e99869;
+  animation: customer-journey-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.customer-journey-footer {
+  margin-top: auto;
+  padding-top: 2rem;
+}
+
+.customer-journey-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(47, 92, 126, 0.16);
+}
+
+.customer-journey-counter {
+  font: 500 0.75rem / 1.5 var(--font-ui);
+  color: #315573;
+}
+
+.customer-journey-counter-total {
+  font-weight: 400;
+  color: #6a7282;
+}
+
+.customer-journey-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.customer-journey-button-prev,
+.customer-journey-button-next {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 2.65rem;
+  height: 2.65rem;
+  padding: 0;
+  border: 1px solid rgba(37, 93, 132, 0.22);
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, filter 0.2s ease;
+}
+
+.customer-journey-button-prev {
+  color: #245275;
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.customer-journey-button-prev:hover {
+  border-color: #245275;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.customer-journey-button-next {
+  color: #eafaff;
+  background: linear-gradient(145deg, #1b5780, #122f58);
+  box-shadow: 0 8px 22px rgba(15, 53, 91, 0.23);
+}
+
+.customer-journey-button-next:hover {
+  filter: brightness(1.15);
+}
+
+.customer-journey-button-prev:focus-visible,
+.customer-journey-button-next:focus-visible,
+.customer-journey-dot:focus-visible {
+  outline: 2px solid #2baecb;
+  outline-offset: 2px;
+}
+
+.customer-journey-dots {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.customer-journey-dot {
+  width: 0.625rem;
+  height: 0.375rem;
+  padding: 0;
+  border: 0;
+  border-radius: 9999px;
+  cursor: pointer;
+  background: rgba(40, 92, 129, 0.24);
+  transition: width 0.2s ease, background-color 0.2s ease;
+}
+
+.customer-journey-dot:hover {
+  background: rgba(40, 92, 129, 0.4);
+}
+
+.customer-journey-dot.is-active,
+.customer-journey-dot.is-active:hover {
+  width: 3rem;
+  background: #e99869;
+}
+
+@keyframes customer-journey-pulse {
+  50% { opacity: 0.5; }
+}
+
+@keyframes customer-journey-slide {
+  from { opacity: 0; transform: translateX(22px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@media (min-width: 768px) {
+  .customer-journey-section {
+    padding-block: clamp(4.5rem, 5vw, 7rem);
+  }
+  .customer-journey-container {
+    padding-inline: 2.5rem;
+  }
+  .customer-journey-card {
+    min-height: 30rem;
+    box-shadow: 0 28px 75px rgba(22, 56, 87, 0.17);
+  }
+  .customer-journey-slide {
+    min-height: 30rem;
+  }
+  .customer-journey-content {
+    padding: clamp(1.5rem, 3vw, 3rem);
+  }
+  .customer-journey-detail {
+    min-height: 8rem;
+    padding-left: 1.25rem;
+  }
+  .customer-journey-detail-text {
+    font-size: 0.95rem;
+    line-height: 1.75;
+  }
+}
+
+@media (min-width: 1024px) {
+  .customer-journey-slide {
+    display: grid;
+    grid-template-columns: 0.72fr 1.28fr;
+    min-height: 35rem;
+  }
+  .customer-journey-media {
+    height: 35rem;
+    max-height: none;
+    align-self: center;
+    padding: 1.5rem;
+  }
+  .customer-journey-image {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .customer-journey-slide,
+  .customer-journey-cursor,
+  .customer-journey-button-prev,
+  .customer-journey-button-next,
+  .customer-journey-dot {
+    transition: none;
+    animation: none;
+  }
+}
